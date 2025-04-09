@@ -1,8 +1,8 @@
 import streamlit as st
 
 translations = {
-    "en": {"home": "Home",  "image_identifier": "Image Identifier"},
-    "es": {"home": "Inicio",  "image_identifier": "Identificador de pisada"},	
+    "en": {"home": "Home",  "image_identifier": "Image Identifier", "foro": "Forum"},
+    "es": {"home": "Inicio",  "image_identifier": "Identificador de pisada", "foro": "Foro"},	
 }
 
 # Helper para traducir los textos
@@ -26,10 +26,14 @@ with st.sidebar:
 if selected_language != st.session_state.language:
     st.session_state.language = selected_language
 
-home = st.Page(f'sections/{selected_language}/home.py',
+home = st.Page(f'sections/home.py',
                        title=translations[selected_language]["home"], default=True)
 imageIdentifier = st.Page(
     "imageIdentifier.py", title=translate("image_identifier"), icon="🔥"
+)
+
+foro = st.Page(
+    'sections/foro.py', title=translate("foro")
 )
 
 # Funciona como router, desde aca se renderizan las paginas
@@ -37,7 +41,7 @@ imageIdentifier = st.Page(
 # Con esto configuro a mano las paginas pudiendo customizar el titulo e icono
 pg = st.navigation(
     {
-        "": [home, imageIdentifier]
+        "": [home, imageIdentifier, foro]
 
     }
 )
